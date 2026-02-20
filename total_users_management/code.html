@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Total Users Management - TaskManager Admin</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+    <div class="flex h-screen overflow-hidden">
+        <main class="flex-1 overflow-y-auto flex flex-col">
+            <header
+                class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 h-16 flex items-center justify-between px-8 sticky top-0 z-10">
+                <div class="flex items-center gap-6 flex-1">
+                    <div class="flex items-center gap-3 pr-6 border-r border-slate-200 dark:border-slate-800">
+                        <div class="bg-primary text-white p-1.5 rounded-lg">
+                            <span class="material-symbols-outlined text-2xl">task_alt</span>
+                        </div>
+                        <h1 class="text-lg font-bold tracking-tight">TaskManager</h1>
+                    </div>
+                    <div class="relative w-full max-w-md">
+                        <span
+                            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+                        <input
+                            class="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border-none rounded-lg text-sm focus:ring-2 focus:ring-primary/20 transition-all"
+                            placeholder="Search across TaskManager..." type="text" />
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button
+                        class="w-10 h-10 flex items-center justify-center text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors relative">
+                        <span class="material-symbols-outlined">notifications</span>
+                        <span
+                            class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
+                    </button>
+                    <div class="flex items-center gap-3 ml-2 pl-4 border-l border-slate-200 dark:border-slate-800">
+                        <div class="w-8 h-8 rounded-full overflow-hidden bg-slate-200">
+                            <img class="w-full h-full object-cover" data-alt="Admin user profile picture"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAU5lk6vzCSGo4FshJzDueut3Pll-YUnL-RH8BjCyzkFQ2m62F1B7ykV5TFGnapqwNPwSM1JL9GPQ8cTH_HqHN0ocAC9wtevudY8u-2DIK_lAkQnLnLSj4-r0hCzidj61lFG31BMYFz-jtox1-1qgKm-r-4q1NYmcjHSeysZHIZnNSHGOHqVCvmDYH6TQJ6aOGa9sL2_5rNvzBrl2chh14dAcUQvai_ID9klGhB13wecpuDsi-sbsjGZ43W8lyYL0dXU9qTRA-MFQc" />
+                        </div>
+                        <span class="text-sm font-semibold hidden md:block">Alex Rivera</span>
+                    </div>
+                </div>
+            </header>
+            <div class="p-8 max-w-7xl mx-auto w-full">
+                <nav class="flex items-center gap-2 mb-6 group">
+                    <a class="inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 hover:text-primary transition-colors"
+                        href="../taskmanager_admin_portal/code.html">
+                        <span class="material-symbols-outlined text-lg">arrow_back</span>
+                        Back to Admin Portal
+                    </a>
+                    <span class="text-slate-300 dark:text-slate-700">/</span>
+                    <span class="text-sm font-medium text-slate-400">Total Users</span>
+                </nav>
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+                    <div>
+                        <h2 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Total Users
+                            Management</h2>
+                        <p class="text-slate-500 dark:text-slate-400 mt-1">Overview and management of all registered
+                            team members and their access levels.</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <button
+                            class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-semibold hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                            <span class="material-symbols-outlined text-lg">download</span>
+                            Export CSV
+                        </button>
+                        <button
+                            class="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-semibold shadow-lg shadow-primary/25 hover:opacity-90 transition-opacity">
+                            <span class="material-symbols-outlined text-lg">person_add</span>
+                            Add New User
+                        </button>
+                    </div>
+                </div>
+                <div
+                    class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 flex flex-wrap gap-4 items-center mb-6">
+                    <div class="flex-1 min-w-[300px] relative">
+                        <span
+                            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">person_search</span>
+                        <input
+                            class="w-full pl-10 pr-4 py-2.5 bg-background-light dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 transition-all"
+                            placeholder="Search by name or email..." type="text" />
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <select
+                            class="bg-background-light dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg text-sm py-2.5 px-4 focus:ring-primary/20">
+                            <option>All Roles</option>
+                            <option>Admin</option>
+                            <option>User</option>
+                        </select>
+                        <select
+                            class="bg-background-light dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg text-sm py-2.5 px-4 focus:ring-primary/20">
+                            <option>All Status</option>
+                            <option>Active</option>
+                            <option>Inactive</option>
+                        </select>
+                    </div>
+                </div>
+                <div
+                    class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400">
+                                    <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider">User Name</th>
+                                    <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider">Email Address</th>
+                                    <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider">Role</th>
+                                    <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider">Date Joined</th>
+                                    <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-right">Actions
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+                                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors group">
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-3">
+                                            <div
+                                                class="size-9 rounded-full bg-slate-100 flex items-center justify-center overflow-hidden">
+                                                <img class="size-full object-cover" data-alt="John Doe profile photo"
+                                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-NiuNhugRySCCekqlbHYh6IsbQKiZU1AqdL_o-IOQ0LVY6nYbWFBOSmumdHguXvtwxKFalu7zeUy5uLTJUntms8zAC-hfBrARNa0iHG1fcxXEmBG_Ie6GkmPsyRre3NoQzycp7uvlhGUZZUF2Ri9qBB1IVn34CoOuTklN44ymp0oyv9wO4hWK44uKiQUywBpTXvrQCTgNJwUFpzcEV6jXfoFMZfqi8vaLxvod9M97Q8HEAU05XR03fYlNAnlPsE4Ii5RWjULCuDU" />
+                                            </div>
+                                            <span class="font-semibold text-slate-900 dark:text-white">John Doe</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">
+                                        john.doe@taskmanager.com</td>
+                                    <td class="px-6 py-4">
+                                        <span
+                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary text-white">Admin</span>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div
+                                            class="flex items-center gap-1.5 text-sm font-medium text-emerald-600 dark:text-emerald-400">
+                                            <span class="size-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                                            Active
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">Jan 12, 2023</td>
+                                    <td class="px-6 py-4 text-right">
+                                        <div class="flex items-center justify-end gap-2">
+                                            <button
+                                                class="p-2 text-primary hover:bg-primary/10 rounded-lg transition-colors"
+                                                title="Edit User">
+                                                <span class="material-symbols-outlined text-xl">edit_square</span>
+                                            </button>
+                                            <button
+                                                class="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                                                title="Deactivate User">
+                                                <span class="material-symbols-outlined text-xl">person_remove</span>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors group">
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-3">
+                                            <div
+                                                class="size-9 rounded-full bg-slate-100 flex items-center justify-center overflow-hidden">
+                                                <img class="size-full object-cover" data-alt="Jane Smith profile photo"
+                                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBq73dl0MUtgtYHaP_HIVvEn5KYXyxW7GuV0dOP0n6YCBr6eaol8s-kfQAIuiBz2UOME7qwckOdFVUxSwV3uhyI7rYwVh47ao5seNMvAb27-jz_SqrDBWESchv4SAj7tEjsSH5h4LzlpzxEukGypWWlQhliDivzQNX2YWkYf8_X6RLke8SAei-mtSe_ulmkht6d8IU5QmeXIhW0XaB6bdmEfsBkh1NhLvPHEj5v3qyGAAFmmQzMT7eI9BpSvS7D901_FFvS2CFTK4I" />
+                                            </div>
+                                            <span class="font-semibold text-slate-900 dark:text-white">Jane Smith</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">
+                                        jane.smith@taskmanager.com</td>
+                                    <td class="px-6 py-4">
+                                        <span
+                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">User</span>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div
+                                            class="flex items-center gap-1.5 text-sm font-medium text-emerald-600 dark:text-emerald-400">
+                                            <span class="size-2 rounded-full bg-emerald-500"></span>
+                                            Active
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">Feb 05, 2023</td>
+                                    <td class="px-6 py-4 text-right">
+                                        <div class="flex items-center justify-end gap-2">
+                                            <button
+                                                class="p-2 text-primary hover:bg-primary/10 rounded-lg transition-colors"
+                                                title="Edit User">
+                                                <span class="material-symbols-outlined text-xl">edit_square</span>
+                                            </button>
+                                            <button
+                                                class="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                                                title="Deactivate User">
+                                                <span class="material-symbols-outlined text-xl">person_remove</span>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors group">
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-3">
+                                            <div
+                                                class="size-9 rounded-full bg-slate-100 flex items-center justify-center overflow-hidden">
+                                                <img class="size-full object-cover"
+                                                    data-alt="Robert Brown profile photo"
+                                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyVnNVMm8-hsFfex0x0A68rKoySs9ZhAbGAbZICN1wSKDiMxEA4llKp-Z9KKIcxCJm-kwFgT4vNkN0RCKEywlfPpKZmK4wGs_8vj2Roy6vlM8Ffxc_EYY7Yv58Jn_eus_rtsuYdWPqtkT9QoygjOmfZvzUJO9oBThyk0OKNZjc7gf6pRASuuEXuobgJocywno2HSqmSo0AS3mInlRSS-no4dwLWJSqp0SJJrwpafX_OsCXTjc3FMWUHWCSmmTuB4bhW6QRf2LpSNU" />
+                                            </div>
+                                            <span class="font-semibold text-slate-900 dark:text-white">Robert
+                                                Brown</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">
+                                        robert.b@taskmanager.com</td>
+                                    <td class="px-6 py-4">
+                                        <span
+                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">User</span>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div
+                                            class="flex items-center gap-1.5 text-sm font-medium text-slate-400 dark:text-slate-500">
+                                            <span class="size-2 rounded-full bg-slate-300 dark:bg-slate-700"></span>
+                                            Inactive
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">Mar 20, 2023</td>
+                                    <td class="px-6 py-4 text-right">
+                                        <div class="flex items-center justify-end gap-2">
+                                            <button
+                                                class="p-2 text-primary hover:bg-primary/10 rounded-lg transition-colors"
+                                                title="Edit User">
+                                                <span class="material-symbols-outlined text-xl">edit_square</span>
+                                            </button>
+                                            <button
+                                                class="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                                                title="Deactivate User">
+                                                <span class="material-symbols-outlined text-xl">person_remove</span>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors group">
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-3">
+                                            <div
+                                                class="size-9 rounded-full bg-slate-100 flex items-center justify-center overflow-hidden">
+                                                <img class="size-full object-cover" data-alt="Emily White profile photo"
+                                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuADZppZ-LMmSZF_4GfxT7AOSG0qVGk1lglN0OD7vooGhFcl7Hgn5zWbDFJyurs5NrblsPnMlPbR_XORim7OCpLkjmL1jWCiBO_Wzkh4ASuljVJc5VHqfI7nRFyTuZa23CI85yJseYhTxLPq_7TpwrJbO0LEbmKiok-MLvXCc1WmY1qBd1NakCBEa2TdCBkDpR7HWkqzSXMHeIY4oF5s5zRAa6SwiWfBwhfb2hTqnj0pbUz66mGsh0zOZyPyEkORFGSOMydk4urS720" />
+                                            </div>
+                                            <span class="font-semibold text-slate-900 dark:text-white">Emily
+                                                White</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">
+                                        emily.white@taskmanager.com</td>
+                                    <td class="px-6 py-4">
+                                        <span
+                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary text-white">Admin</span>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div
+                                            class="flex items-center gap-1.5 text-sm font-medium text-emerald-600 dark:text-emerald-400">
+                                            <span class="size-2 rounded-full bg-emerald-500"></span>
+                                            Active
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">Apr 15, 2023</td>
+                                    <td class="px-6 py-4 text-right">
+                                        <div class="flex items-center justify-end gap-2">
+                                            <button
+                                                class="p-2 text-primary hover:bg-primary/10 rounded-lg transition-colors"
+                                                title="Edit User">
+                                                <span class="material-symbols-outlined text-xl">edit_square</span>
+                                            </button>
+                                            <button
+                                                class="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                                                title="Deactivate User">
+                                                <span class="material-symbols-outlined text-xl">person_remove</span>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors group">
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-3">
+                                            <div
+                                                class="size-9 rounded-full bg-slate-100 flex items-center justify-center overflow-hidden">
+                                                <img class="size-full object-cover"
+                                                    data-alt="Michael Green profile photo"
+                                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJoqFw0t9eCqawkzRl6CFwPdHokftfwNRJpwMFUZuigTZNdCi4jdQuLExIFOwEJqB3jq1j4hIdCXBuosWEsOg6SYVPZJ4Av4BNN2rxiN1_ebGVGEV1Wrmo6dqtgvjVyH5vvDcsD9W9MIteX-KqSf0S3AbuQpkWOiyHoP20qUf_Lt1u7v9yViDwzFBVAcfYCdJF-j0GCXlLFSAQkSmsUyC_6bMA9kCzOfr6We6OJkfZCB27e9h7xWkqs2OcEJyptMLbiemb_WglXhA" />
+                                            </div>
+                                            <span class="font-semibold text-slate-900 dark:text-white">Michael
+                                                Green</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">
+                                        m.green@taskmanager.com</td>
+                                    <td class="px-6 py-4">
+                                        <span
+                                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">User</span>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div
+                                            class="flex items-center gap-1.5 text-sm font-medium text-emerald-600 dark:text-emerald-400">
+                                            <span class="size-2 rounded-full bg-emerald-500"></span>
+                                            Active
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">May 10, 2023</td>
+                                    <td class="px-6 py-4 text-right">
+                                        <div class="flex items-center justify-end gap-2">
+                                            <button
+                                                class="p-2 text-primary hover:bg-primary/10 rounded-lg transition-colors"
+                                                title="Edit User">
+                                                <span class="material-symbols-outlined text-xl">edit_square</span>
+                                            </button>
+                                            <button
+                                                class="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                                                title="Deactivate User">
+                                                <span class="material-symbols-outlined text-xl">person_remove</span>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div
+                        class="px-6 py-4 bg-slate-50 dark:bg-slate-800/50 flex items-center justify-between border-t border-slate-200 dark:border-slate-800">
+                        <p class="text-sm text-slate-500 dark:text-slate-400">Showing 1 to 5 of 1,240 users</p>
+                        <div class="flex items-center gap-2">
+                            <button
+                                class="p-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-white dark:hover:bg-slate-800 transition-colors disabled:opacity-50"
+                                disabled="">
+                                <span class="material-symbols-outlined text-xl">chevron_left</span>
+                            </button>
+                            <button class="px-3 py-1 bg-primary text-white rounded-lg text-sm font-semibold">1</button>
+                            <button
+                                class="px-3 py-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-sm font-semibold">2</button>
+                            <button
+                                class="px-3 py-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-sm font-semibold">3</button>
+                            <span class="text-slate-400">...</span>
+                            <button
+                                class="px-3 py-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-sm font-semibold">248</button>
+                            <button
+                                class="p-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-white dark:hover:bg-slate-800 transition-colors">
+                                <span class="material-symbols-outlined text-xl">chevron_right</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                    <div
+                        class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+                        <div class="flex items-center justify-between mb-4">
+                            <div
+                                class="size-10 bg-blue-50 dark:bg-blue-900/20 text-blue-600 rounded-lg flex items-center justify-center">
+                                <span class="material-symbols-outlined">group</span>
+                            </div>
+                            <span class="text-xs font-bold text-emerald-500 flex items-center gap-1">
+                                <span class="material-symbols-outlined text-xs">trending_up</span> 12%
+                            </span>
+                        </div>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Total Active Users</p>
+                        <p class="text-2xl font-bold mt-1">1,024</p>
+                    </div>
+                    <div
+                        class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+                        <div class="flex items-center justify-between mb-4">
+                            <div
+                                class="size-10 bg-purple-50 dark:bg-purple-900/20 text-purple-600 rounded-lg flex items-center justify-center">
+                                <span class="material-symbols-outlined">shield_person</span>
+                            </div>
+                            <span class="text-xs font-bold text-slate-400 flex items-center gap-1">
+                                <span class="material-symbols-outlined text-xs">remove</span> 0%
+                            </span>
+                        </div>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">System Administrators</p>
+                        <p class="text-2xl font-bold mt-1">42</p>
+                    </div>
+                    <div
+                        class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+                        <div class="flex items-center justify-between mb-4">
+                            <div
+                                class="size-10 bg-amber-50 dark:bg-amber-900/20 text-amber-600 rounded-lg flex items-center justify-center">
+                                <span class="material-symbols-outlined">person_off</span>
+                            </div>
+                            <span class="text-xs font-bold text-red-500 flex items-center gap-1">
+                                <span class="material-symbols-outlined text-xs">trending_up</span> 4%
+                            </span>
+                        </div>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Inactive Accounts</p>
+                        <p class="text-2xl font-bold mt-1">174</p>
+                    </div>
+                </div>
+            </div>
+            <footer class="mt-auto px-8 py-6 border-t border-slate-200 dark:border-slate-800 text-center">
+                <p class="text-sm text-slate-500">© 2024 TaskManager Admin Console. All rights reserved.</p>
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('token');
+            const user = JSON.parse(localStorage.getItem('user'));
+
+            if (!token || !user || user.role !== 'admin') {
+                alert('Access Denied. Please login as an administrator.');
+                window.location.href = '../taskmanager_login_screen/code.html';
+                return;
+            }
+
+            loadUsers();
+        });
+
+        async function loadUsers() {
+            const token = localStorage.getItem('token');
+            const tbody = document.querySelector('tbody');
+            const paginationText = document.querySelector('.px-6.py-4.bg-slate-50 p');
+            
+            try {
+                const response = await fetch('http://localhost:8000/auth/users', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (response.ok) {
+                    const users = await response.json();
+                    tbody.innerHTML = '';
+                    
+                    let activeCount = 0;
+                    let adminCount = 0;
+                    
+                    users.forEach(user => {
+                        if (user.role === 'admin') adminCount++;
+                        activeCount++;
+                        
+                        const initials = user.fullname.split(' ').map(n => n[0]).join('').toUpperCase();
+                        const joinDate = user.created_at ? new Date(user.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'N/A';
+                        const roleClass = user.role === 'admin' ? 'bg-primary text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300';
+                        
+                        tbody.innerHTML += `
+                            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors group">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-3">
+                                        <div class="size-9 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xs">
+                                            ${initials}
+                                        </div>
+                                        <span class="font-semibold text-slate-900 dark:text-white">${user.fullname}</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">${user.email}</td>
+                                <td class="px-6 py-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold ${roleClass}">${user.role.charAt(0).toUpperCase() + user.role.slice(1)}</span>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-1.5 text-sm font-medium text-emerald-600 dark:text-emerald-400">
+                                        <span class="size-2 rounded-full bg-emerald-500"></span>
+                                        Active
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">${joinDate}</td>
+                                <td class="px-6 py-4 text-right">
+                                    <div class="flex items-center justify-end gap-2">
+                                        <button class="p-2 text-primary hover:bg-primary/10 rounded-lg transition-colors" title="Edit User">
+                                            <span class="material-symbols-outlined text-xl">edit_square</span>
+                                        </button>
+                                        <button onclick="deleteUser('${user.id}', '${user.fullname}', '${user.role}')" 
+                                            class="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors ${user.role === 'admin' ? 'opacity-50 cursor-not-allowed' : ''}" 
+                                            title="${user.role === 'admin' ? 'Cannot delete admin' : 'Delete User'}"
+                                            ${user.role === 'admin' ? 'disabled' : ''}>
+                                            <span class="material-symbols-outlined text-xl">person_remove</span>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        `;
+                    });
+                    
+                    // Update pagination text
+                    if (paginationText) {
+                        paginationText.textContent = `Showing 1 to ${users.length} of ${users.length} users`;
+                    }
+                    
+                    // Update stats cards
+                    const statsCards = document.querySelectorAll('.grid.grid-cols-1.md\\:grid-cols-3 .text-2xl');
+                    if (statsCards.length >= 3) {
+                        statsCards[0].textContent = activeCount; // Total Active Users
+                        statsCards[1].textContent = adminCount;  // System Administrators
+                        statsCards[2].textContent = '0';         // Inactive Accounts
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading users:', error);
+            }
+        }
+
+        async function deleteUser(userId, userName, userRole) {
+            // Prevent deleting admins
+            if (userRole === 'admin') {
+                alert('Cannot delete admin users.');
+                return;
+            }
+
+            // Confirm deletion
+            if (!confirm(`Are you sure you want to delete user "${userName}"?\n\nThis action cannot be undone.`)) {
+                return;
+            }
+
+            const token = localStorage.getItem('token');
+
+            try {
+                const response = await fetch(`http://localhost:8000/auth/users/${userId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert('User deleted successfully!');
+                    loadUsers(); // Refresh the user list
+                } else {
+                    alert(data.detail || 'Failed to delete user.');
+                }
+            } catch (error) {
+                console.error('Error deleting user:', error);
+                alert('Failed to connect to backend.');
+            }
+        }
+    </script>
+</body>
+
+</html>

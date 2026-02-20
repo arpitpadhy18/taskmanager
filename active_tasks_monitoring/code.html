@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Active Tasks Monitoring - TaskManager</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+    <div class="flex h-screen overflow-hidden">
+        <main class="flex-1 flex flex-col overflow-hidden">
+            <header
+                class="h-16 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark px-8 flex items-center justify-between z-10">
+                <div class="flex items-center gap-6">
+                    <a class="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors group"
+                        href="../taskmanager_admin_portal/code.html">
+                        <span class="material-symbols-outlined">arrow_back</span>
+                        <span class="text-sm font-semibold">Back to Admin Portal</span>
+                    </a>
+                    <div class="h-6 w-px bg-slate-200 dark:bg-slate-700"></div>
+                    <div class="flex items-center gap-3">
+                        <h2 class="text-xl font-bold">Active Tasks Monitoring</h2>
+                        <span class="px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-xs font-bold">124
+                            Total</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="relative">
+                        <span
+                            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+                        <input
+                            class="pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border-none rounded-lg text-sm w-64 focus:ring-2 focus:ring-primary/20"
+                            placeholder="Quick search..." type="text" />
+                    </div>
+                    <button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">
+                        <span class="material-symbols-outlined">notifications</span>
+                    </button>
+                    <div class="flex items-center gap-3 ml-2 pl-4 border-l border-slate-200 dark:border-slate-700">
+                        <img class="size-8 rounded-full object-cover" data-alt="Admin user profile picture"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3-ogoGyw3kv761zwuEDMfbmZFR1nBWRfVYfqIrtoEsf85waxFyXxe9pQTjzbdutrLIn9TvwOQWWmaw8n7zLtU0AoUEfceB4OdQ2vUDC-r9Lsx9pIss-xcCWZVAV07eaLOeo0muzarLx05CYZJdC6EaFCLjiS8iPLsTG7Lx7mkdpp-ujfydrLDxft1PGRIvNr_W1yypoO5PoLi3QW4ejHNpTXqsWr8PKLKGq_DMdjBxnh91Qs32p-FicdglxYfNdPVR6AV2t0M-BQ" />
+                        <span class="text-sm font-semibold hidden lg:block">Alex Rivera</span>
+                    </div>
+                </div>
+            </header>
+            <div class="flex-1 overflow-y-auto p-8 bg-background-light dark:bg-background-dark">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div
+                        class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-sm font-medium text-slate-500 mb-1">Total Active</p>
+                                <h3 class="text-3xl font-bold">124</h3>
+                            </div>
+                            <div class="p-2 bg-primary/10 text-primary rounded-lg">
+                                <span class="material-symbols-outlined">analytics</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-center gap-2">
+                            <span class="text-xs font-bold text-emerald-500 flex items-center">
+                                <span class="material-symbols-outlined text-xs">trending_up</span> +5%
+                            </span>
+                            <span class="text-xs text-slate-400">vs last week</span>
+                        </div>
+                    </div>
+                    <div
+                        class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-sm font-medium text-slate-500 mb-1">Overdue</p>
+                                <h3 class="text-3xl font-bold">8</h3>
+                            </div>
+                            <div class="p-2 bg-rose-100 text-rose-600 rounded-lg">
+                                <span class="material-symbols-outlined">schedule</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-center gap-2">
+                            <span class="text-xs font-bold text-rose-500 flex items-center">
+                                <span class="material-symbols-outlined text-xs">trending_down</span> -2%
+                            </span>
+                            <span class="text-xs text-slate-400">vs last week</span>
+                        </div>
+                    </div>
+                    <div
+                        class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-sm font-medium text-slate-500 mb-1">High Priority</p>
+                                <h3 class="text-3xl font-bold">15</h3>
+                            </div>
+                            <div class="p-2 bg-amber-100 text-amber-600 rounded-lg">
+                                <span class="material-symbols-outlined">priority_high</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex items-center gap-2">
+                            <span class="text-xs font-bold text-emerald-500 flex items-center">
+                                <span class="material-symbols-outlined text-xs">trending_up</span> +10%
+                            </span>
+                            <span class="text-xs text-slate-400">vs last week</span>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden mb-6">
+                    <div class="p-4 flex flex-wrap items-center gap-4">
+                        <div class="flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-300">
+                            <span class="material-symbols-outlined text-slate-400">filter_list</span>
+                            Filter by:
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="relative">
+                                <input id="searchInput" type="text" placeholder="Search tasks..."
+                                    class="pl-4 pr-4 py-1.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium focus:ring-primary focus:border-primary w-40" />
+                            </div>
+                            <div class="relative">
+                                <select id="assigneeFilter"
+                                    class="appearance-none pl-4 pr-10 py-1.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium focus:ring-primary focus:border-primary">
+                                    <option value="">Assigned: All Users</option>
+                                </select>
+                                <span
+                                    class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 text-lg">expand_more</span>
+                            </div>
+                            <div class="relative">
+                                <select id="statusFilter"
+                                    class="appearance-none pl-4 pr-10 py-1.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium focus:ring-primary focus:border-primary">
+                                    <option value="">Status: All</option>
+                                    <option value="in_progress">In Progress</option>
+                                    <option value="pending">Pending</option>
+                                </select>
+                                <span
+                                    class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 text-lg">expand_more</span>
+                            </div>
+                        </div>
+                        <div class="flex-1"></div>
+                        <button
+                            class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primary/90 transition-colors flex items-center gap-2">
+                            <span class="material-symbols-outlined text-sm">add</span>
+                            New Task
+                        </button>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr
+                                    class="bg-slate-50 dark:bg-slate-800/50 border-y border-slate-200 dark:border-slate-800">
+                                    <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Task
+                                        Title</th>
+                                    <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">
+                                        Assigned To</th>
+                                    <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Due
+                                        Date</th>
+                                    <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">
+                                        Status</th>
+                                    <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">
+                                        Priority</th>
+                                    <th
+                                        class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 text-right">
+                                        Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+                                <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors group">
+                                    <td class="px-6 py-4">
+                                        <div class="flex flex-col">
+                                            <span class="text-sm font-bold text-slate-900 dark:text-slate-100">Redesign
+                                                User Onboarding Flow</span>
+                                            <span class="text-xs text-slate-500">Project: Web App 2.0</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-3">
+                                            <img class="size-8 rounded-full object-cover"
+                                                data-alt="Sarah Johnson profile"
+                                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4qRJJcATjkrqB7KZq5CC4X-wD9D2ZOs840mt2p3vB3cxu_qJ1kh1-bgGy2yM8mCvSLTG0X-G82UTqRSoATutBNlwQ-9gnXMrt9dq3n1kPmMJFWfS77W017c1JRohu8hR3nR1BEsq6z9LT7Swry14mMLPXJf22s1wQCwLSQzWzWKbmopy2L_P61dF4_tHaoLBxkr-YzI1zvSu_-Dkup7D70MciO896t2UpZbrYY2cfbH5NkaoK3R9OoxhGfGyCNQ2ZyvEsF5KOoEM" />
+                                            <span class="text-sm font-medium">Sarah Johnson</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div class="flex flex-col">
+                                            <span class="text-sm font-medium">Oct 24, 2023</span>
+                                            <span class="text-[10px] font-bold text-rose-500 uppercase">2 days
+                                                overdue</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <span
+                                            class="px-2.5 py-1 rounded-md bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-xs font-bold">In
+                                            Progress</span>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-1.5 text-rose-600">
+                                            <span class="material-symbols-outlined text-sm font-bold">error</span>
+                                            <span class="text-xs font-bold uppercase">High</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-right">
+                                        <button
+                                            class="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+                                            <span class="material-symbols-outlined text-lg">more_horiz</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors group">
+                                    <td class="px-6 py-4">
+                                        <div class="flex flex-col">
+                                            <span class="text-sm font-bold text-slate-900 dark:text-slate-100">API
+                                                Documentation Update</span>
+                                            <span class="text-xs text-slate-500">Project: Backend Infrastructure</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-3">
+                                            <img class="size-8 rounded-full object-cover" data-alt="Marcus Chen profile"
+                                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCb6Ha31asJnnYiBcW2EmNwmC3OU9_JE3xFLwFUrQ2F2kTu3Pm7iI4K1V0x1WCjb-eRWOiuqYH2yJOSm5OXCxqntMAAinfmC34AEfAWzYhqTJmmvud4ULdf1bDay75pwuzlYQUMzSC80w32MvDdtipirC56nH0KumovmeVIrTsqXWHb6vzEhbMBRrRNFjnej_nUjtAzVm7oWhv4gt0s-yxAtBmg-RTRYDHfXmprNeZ-pQumTyN_rOb88gE1g1of2a_HrJrUVZvorm4" />
+                                            <span class="text-sm font-medium">Marcus Chen</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div class="flex flex-col">
+                                            <span class="text-sm font-medium">Oct 28, 2023</span>
+                                            <span class="text-[10px] font-bold text-slate-400 uppercase">In 4
+                                                days</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <span
+                                            class="px-2.5 py-1 rounded-md bg-amber-50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400 text-xs font-bold">Pending</span>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-1.5 text-amber-600">
+                                            <span class="material-symbols-outlined text-sm font-bold">warning</span>
+                                            <span class="text-xs font-bold uppercase">Medium</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-right">
+                                        <button
+                                            class="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+                                            <span class="material-symbols-outlined text-lg">more_horiz</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors group">
+                                    <td class="px-6 py-4">
+                                        <div class="flex flex-col">
+                                            <span class="text-sm font-bold text-slate-900 dark:text-slate-100">Database
+                                                Migration</span>
+                                            <span class="text-xs text-slate-500">Project: Backend Infrastructure</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-3">
+                                            <div
+                                                class="size-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xs">
+                                                ER</div>
+                                            <span class="text-sm font-medium">Elena Rodriguez</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div class="flex flex-col">
+                                            <span class="text-sm font-medium">Oct 27, 2023</span>
+                                            <span class="text-[10px] font-bold text-slate-400 uppercase">In 3
+                                                days</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <span
+                                            class="px-2.5 py-1 rounded-md bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-xs font-bold">In
+                                            Progress</span>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-1.5 text-rose-600">
+                                            <span class="material-symbols-outlined text-sm font-bold">error</span>
+                                            <span class="text-xs font-bold uppercase">High</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-right">
+                                        <button
+                                            class="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+                                            <span class="material-symbols-outlined text-lg">more_horiz</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors group">
+                                    <td class="px-6 py-4">
+                                        <div class="flex flex-col">
+                                            <span class="text-sm font-bold text-slate-900 dark:text-slate-100">Legacy
+                                                Bug Cleanup</span>
+                                            <span class="text-xs text-slate-500">Project: Quality Assurance</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-3">
+                                            <img class="size-8 rounded-full object-cover" data-alt="David Lee profile"
+                                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVl8NCjSUyKhyKz9RQ8act-cMz1czR6tU8BZ0H11DFR5I8ZAmLWhx6a-HewKGSfz9Eke9vDumaxmYlUHhn0f5UNP5_exBnMf5jXplUbmje99QCiBC_OZ7PSXSO2RdKDHdJr4YQfd_0AGhfDcJU7Xqw108sFBkeWthg8Nd0QJDPFqydO2ZDglLQoVerE-T82Adfy5zaTcfoggb-StVoA4HJv8AI5gEhJwsGOJ2hkENGIAwlcvSC8PHLBppnHOKTwFTR2yYBg6RiP8A" />
+                                            <span class="text-sm font-medium">David Lee</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div class="flex flex-col">
+                                            <span class="text-sm font-medium">Nov 05, 2023</span>
+                                            <span class="text-[10px] font-bold text-slate-400 uppercase">Next
+                                                week</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <span
+                                            class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-xs font-bold">In
+                                            Progress</span>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-1.5 text-emerald-600">
+                                            <span
+                                                class="material-symbols-outlined text-sm font-bold">check_circle</span>
+                                            <span class="text-xs font-bold uppercase">Low</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-right">
+                                        <button
+                                            class="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+                                            <span class="material-symbols-outlined text-lg">more_horiz</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="p-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                        <p class="text-sm text-slate-500">Showing <span
+                                class="font-bold text-slate-900 dark:text-slate-100">1</span> to <span
+                                class="font-bold text-slate-900 dark:text-slate-100">10</span> of <span
+                                class="font-bold text-slate-900 dark:text-slate-100">124</span> tasks</p>
+                        <div class="flex items-center gap-2">
+                            <button
+                                class="px-3 py-1.5 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-50"
+                                disabled="">
+                                Previous
+                            </button>
+                            <div class="flex items-center gap-1">
+                                <button
+                                    class="size-8 flex items-center justify-center bg-primary text-white text-sm font-bold rounded-lg">1</button>
+                                <button
+                                    class="size-8 flex items-center justify-center text-sm font-medium rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800">2</button>
+                                <button
+                                    class="size-8 flex items-center justify-center text-sm font-medium rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800">3</button>
+                                <span class="px-2 text-slate-400">...</span>
+                                <button
+                                    class="size-8 flex items-center justify-center text-sm font-medium rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800">13</button>
+                            </div>
+                            <button
+                                class="px-3 py-1.5 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800">
+                                Next
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-between items-center text-xs text-slate-500">
+                    <div class="flex items-center gap-4">
+                        <span class="flex items-center gap-1"><span
+                                class="material-symbols-outlined text-sm">update</span> Last sync: Just now</span>
+                        <span class="flex items-center gap-1"><span
+                                class="material-symbols-outlined text-sm">wifi</span> Status: Online</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button id="exportCSVBtn" class="hover:text-primary transition-colors">Export CSV</button>
+                        <span>•</span>
+                        <button id="printReportBtn" class="hover:text-primary transition-colors">Print Report</button>
+                        <span>•</span>
+                        <button id="clearFiltersBtn" class="hover:text-primary transition-colors font-medium">Clear all filters</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        let allTasks = [];
+        let filteredTasks = [];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('token');
+            const user = JSON.parse(localStorage.getItem('user'));
+
+            if (!token || !user || user.role !== 'admin') {
+                alert('Access Denied. Please login as an administrator.');
+                window.location.href = '../taskmanager_login_screen/code.html';
+                return;
+            }
+
+            loadActiveTasks();
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            // Search input - filter on typing
+            document.getElementById('searchInput').addEventListener('input', applyFilters);
+            
+            // Filter dropdowns
+            document.getElementById('assigneeFilter').addEventListener('change', applyFilters);
+            document.getElementById('statusFilter').addEventListener('change', applyFilters);
+            
+            // Export CSV
+            document.getElementById('exportCSVBtn').addEventListener('click', exportToCSV);
+            
+            // Print Report
+            document.getElementById('printReportBtn').addEventListener('click', () => {
+                window.print();
+            });
+            
+            // Clear filters
+            document.getElementById('clearFiltersBtn').addEventListener('click', () => {
+                document.getElementById('searchInput').value = '';
+                document.getElementById('assigneeFilter').value = '';
+                document.getElementById('statusFilter').value = '';
+                filteredTasks = [...allTasks];
+                renderTasks(filteredTasks);
+            });
+        }
+
+        function applyFilters() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const assignee = document.getElementById('assigneeFilter').value;
+            const status = document.getElementById('statusFilter').value;
+
+            filteredTasks = allTasks.filter(task => {
+                // Search filter
+                const matchesSearch = !searchTerm || 
+                    task.title.toLowerCase().includes(searchTerm) || 
+                    task.assigned_to.fullname.toLowerCase().includes(searchTerm) ||
+                    task.description.toLowerCase().includes(searchTerm);
+
+                // Assignee filter
+                const matchesAssignee = !assignee || task.assigned_to.id === assignee;
+
+                // Status filter
+                const matchesStatus = !status || task.status === status;
+
+                return matchesSearch && matchesAssignee && matchesStatus;
+            });
+
+            renderTasks(filteredTasks);
+        }
+
+        function exportToCSV() {
+            const tasksToExport = filteredTasks.length > 0 ? filteredTasks : allTasks;
+            
+            if (tasksToExport.length === 0) {
+                alert('No tasks to export');
+                return;
+            }
+
+            const headers = ['Title', 'Description', 'Assigned To', 'Email', 'Due Date', 'Priority', 'Status'];
+            const rows = tasksToExport.map(task => [
+                `"${task.title.replace(/"/g, '""')}"`,
+                `"${task.description.replace(/"/g, '""')}"`,
+                `"${task.assigned_to.fullname}"`,
+                `"${task.assigned_to.email}"`,
+                task.due_date,
+                (task.priority || 'medium').charAt(0).toUpperCase() + (task.priority || 'medium').slice(1),
+                task.status === 'in_progress' ? 'In Progress' : 'Pending'
+            ]);
+
+            const csvContent = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `active_tasks_${new Date().toISOString().split('T')[0]}.csv`;
+            link.click();
+        }
+
+        async function loadActiveTasks() {
+            const token = localStorage.getItem('token');
+            
+            try {
+                const response = await fetch('http://localhost:8000/tasks/active', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (response.ok) {
+                    allTasks = await response.json();
+                    filteredTasks = [...allTasks];
+                    
+                    // Populate assignee filter
+                    populateAssigneeFilter();
+                    
+                    // Render tasks
+                    renderTasks(allTasks);
+                    
+                    // Update stats
+                    updateStats();
+                }
+            } catch (error) {
+                console.error('Error loading active tasks:', error);
+            }
+        }
+
+        function populateAssigneeFilter() {
+            const assigneeFilter = document.getElementById('assigneeFilter');
+            const uniqueAssignees = [...new Map(allTasks.map(t => [t.assigned_to.id, t.assigned_to])).values()];
+            
+            assigneeFilter.innerHTML = '<option value="">Assigned: All Users</option>';
+            uniqueAssignees.forEach(assignee => {
+                assigneeFilter.innerHTML += `<option value="${assignee.id}">${assignee.fullname}</option>`;
+            });
+        }
+
+        function updateStats() {
+            const today = new Date();
+            let overdueCount = 0;
+            
+            allTasks.forEach(task => {
+                const dueDate = new Date(task.due_date);
+                if (dueDate < today) overdueCount++;
+            });
+            
+            // Update stats cards
+            const totalActiveEl = document.querySelector('.grid.grid-cols-1.md\\:grid-cols-3 h3');
+            const headerBadge = document.querySelector('.px-2\.5.py-0\.5.rounded-full.bg-primary\/10');
+            const overdueEl = document.querySelectorAll('.grid.grid-cols-1.md\\:grid-cols-3 h3')[1];
+            
+            if (totalActiveEl) totalActiveEl.textContent = allTasks.length;
+            if (headerBadge) headerBadge.textContent = `${allTasks.length} Total`;
+            if (overdueEl) overdueEl.textContent = overdueCount;
+        }
+
+        function renderTasks(tasks) {
+            const tbody = document.querySelector('tbody');
+            const today = new Date();
+            tbody.innerHTML = '';
+            
+            if (tasks.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="px-6 py-12 text-center text-slate-500">
+                            <span class="material-symbols-outlined text-4xl mb-2">check_circle</span>
+                            <p>No active tasks found</p>
+                        </td>
+                    </tr>
+                `;
+            } else {
+                tasks.forEach(task => {
+                    const dueDate = new Date(task.due_date);
+                    const isOverdue = dueDate < today;
+                    
+                    const dueDateFormatted = dueDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                    const initials = task.assigned_to.fullname.split(' ').map(n => n[0]).join('').toUpperCase();
+                    
+                    const statusClass = task.status === 'in_progress' 
+                        ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400' 
+                        : 'bg-amber-50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400';
+                    const statusText = task.status === 'in_progress' ? 'In Progress' : 'Pending';
+                    
+                    let dueDateLabel = '';
+                    if (isOverdue) {
+                        const daysOverdue = Math.ceil((today - dueDate) / (1000 * 60 * 60 * 24));
+                        dueDateLabel = `<span class="text-[10px] font-bold text-rose-500 uppercase">${daysOverdue} day${daysOverdue > 1 ? 's' : ''} overdue</span>`;
+                    } else {
+                        const daysUntil = Math.ceil((dueDate - today) / (1000 * 60 * 60 * 24));
+                        dueDateLabel = `<span class="text-[10px] font-bold text-slate-400 uppercase">In ${daysUntil} day${daysUntil > 1 ? 's' : ''}</span>`;
+                    }
+                    
+                    // Priority styling
+                    const priority = task.priority || 'medium';
+                    const priorityConfig = {
+                        low: { color: 'text-blue-600', icon: 'arrow_downward', label: 'Low' },
+                        medium: { color: 'text-amber-600', icon: 'remove', label: 'Medium' },
+                        high: { color: 'text-orange-600', icon: 'arrow_upward', label: 'High' },
+                        urgent: { color: 'text-red-600', icon: 'priority_high', label: 'Urgent' }
+                    };
+                    const pConfig = priorityConfig[priority] || priorityConfig.medium;
+                    
+                    tbody.innerHTML += `
+                        <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors group">
+                            <td class="px-6 py-4">
+                                <div class="flex flex-col">
+                                    <span class="text-sm font-bold text-slate-900 dark:text-slate-100">${task.title}</span>
+                                    <span class="text-xs text-slate-500">${task.description.substring(0, 40)}${task.description.length > 40 ? '...' : ''}</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="size-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xs">
+                                        ${initials}
+                                    </div>
+                                    <span class="text-sm font-medium">${task.assigned_to.fullname}</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex flex-col">
+                                    <span class="text-sm font-medium">${dueDateFormatted}</span>
+                                    ${dueDateLabel}
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="px-2.5 py-1 rounded-md ${statusClass} text-xs font-bold">${statusText}</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center gap-1.5 ${pConfig.color}">
+                                    <span class="material-symbols-outlined text-sm font-bold">${pConfig.icon}</span>
+                                    <span class="text-xs font-bold uppercase">${pConfig.label}</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <button class="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+                                    <span class="material-symbols-outlined text-lg">more_horiz</span>
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                });
+            }
+            
+            // Update pagination
+            const paginationText = document.querySelector('.p-4.border-t p');
+            if (paginationText) {
+                paginationText.innerHTML = `Showing <span class="font-bold text-slate-900 dark:text-slate-100">1</span> to <span class="font-bold text-slate-900 dark:text-slate-100">${tasks.length}</span> of <span class="font-bold text-slate-900 dark:text-slate-100">${allTasks.length}</span> tasks`;
+            }
+        }
+    </script>
+</body>
+
+</html>

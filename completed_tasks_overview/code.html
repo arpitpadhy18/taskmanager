@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Completed Tasks Overview - TaskManager</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+            .material-symbols-outlined {
+                font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            }
+            body {
+                font-family: 'Inter', sans-serif;
+            }
+        }.grid-table {
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        .grid-table th, .grid-table td {
+            border-right: 1px solid #e5e7eb;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .dark .grid-table th, .dark .grid-table td {
+            border-right: 1px solid #374151;
+            border-bottom: 1px solid #374151;
+        }
+        .grid-table th:last-child, .grid-table td:last-child {
+            border-right: none;
+        }
+        .grid-table tr:last-child td {
+            border-bottom: none;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-[#111418] dark:text-white transition-colors duration-200">
+    <div class="relative flex min-h-screen w-full flex-col">
+        <header
+            class="flex items-center justify-between border-b border-solid border-[#dbe0e6] dark:border-gray-800 bg-white dark:bg-background-dark px-6 py-3 sticky top-0 z-50">
+            <div class="flex items-center gap-8 w-full max-w-[1440px] mx-auto">
+                <div class="flex items-center gap-3 text-primary">
+                    <div class="size-8 flex items-center justify-center bg-primary rounded-lg text-white">
+                        <span class="material-symbols-outlined text-xl">check_circle</span>
+                    </div>
+                    <h2 class="text-[#111418] dark:text-white text-lg font-bold leading-tight tracking-tight">
+                        TaskManager</h2>
+                </div>
+                <nav class="hidden md:flex flex-1 justify-center gap-8">
+                    <a class="text-sm font-medium text-[#617589] hover:text-primary dark:text-gray-400 dark:hover:text-primary transition-colors"
+                        href="../user_task_dashboard_grid/code.html">Dashboard</a>
+                    <a class="text-sm font-semibold text-primary" href="#">Tasks</a>
+                    <a class="text-sm font-medium text-[#617589] hover:text-primary dark:text-gray-400 dark:hover:text-primary transition-colors"
+                        href="#">Teams</a>
+                    <a class="text-sm font-medium text-[#617589] hover:text-primary dark:text-gray-400 dark:hover:text-primary transition-colors"
+                        href="#">Reports</a>
+                    <a class="text-sm font-medium text-[#617589] hover:text-primary dark:text-gray-400 dark:hover:text-primary transition-colors"
+                        href="#">Settings</a>
+                </nav>
+                <div class="flex items-center gap-4">
+                    <label class="hidden lg:flex items-center relative">
+                        <span class="material-symbols-outlined absolute left-3 text-[#617589] text-xl">search</span>
+                        <input
+                            class="form-input w-64 rounded-lg border-none bg-background-light dark:bg-gray-800 pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/50"
+                            placeholder="Search tasks..." type="text" />
+                    </label>
+                    <button
+                        class="p-2 text-[#617589] dark:text-gray-400 hover:bg-background-light dark:hover:bg-gray-800 rounded-full transition-colors">
+                        <span class="material-symbols-outlined">notifications</span>
+                    </button>
+                    <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-9 border border-[#dbe0e6] dark:border-gray-700"
+                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC1ulptgkWEJP1Bj_cbXZtWwqxKMksnV_DCWKm-WXeYT1q78kfHS-HHj5LSfNhIffNkyrdD83LFt1X52GvfoW-fOsQu50dE5mXTxAEmo6kxZrxtyulDvCMANjX6eRhveMnXa6F7755w9XqI13Qpv1QprcK4WDKXmmUN_CKw4w1dscrQdI3jEfU2sB9KG-UFQf9_ylWgGB0ibsjWiQLI2uAug8a6TTsLaG8QBYB8RwCw9NJ8rBLKdculCAWv3XnO3JdU-SLe2d4Xmaw");'>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main class="flex-1 w-full max-w-[1440px] mx-auto p-6 md:p-10">
+            <div class="mb-6">
+                <a class="inline-flex items-center gap-2 text-sm font-semibold text-[#617589] hover:text-primary transition-colors group"
+                    href="../taskmanager_admin_portal/code.html">
+                    <span
+                        class="material-symbols-outlined text-lg transition-transform group-hover:-translate-x-1">arrow_back</span>
+                    Back to Admin Portal
+                </a>
+            </div>
+            <div class="flex flex-wrap justify-between items-end gap-4 mb-8">
+                <div class="flex flex-col gap-1">
+                    <h1 class="text-[#111418] dark:text-white text-3xl font-black leading-tight tracking-tight">
+                        Completed Tasks</h1>
+                    <p class="text-[#617589] dark:text-gray-400 text-base">Track efficiency and performance of finished
+                        projects.</p>
+                </div>
+                <div class="flex gap-3">
+                    <button id="toggleFilterBtn"
+                        class="flex items-center gap-2 rounded-lg bg-white dark:bg-gray-800 border border-[#dbe0e6] dark:border-gray-700 px-4 py-2 text-sm font-bold text-[#111418] dark:text-white hover:bg-gray-50 transition-colors">
+                        <span class="material-symbols-outlined text-lg">filter_list</span>
+                        Filter
+                    </button>
+                    <button id="exportBtn"
+                        class="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-white hover:bg-primary/90 shadow-sm transition-colors shadow-primary/20">
+                        <span class="material-symbols-outlined text-lg">file_download</span>
+                        Export Report
+                    </button>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+                <div
+                    class="flex flex-col gap-3 rounded-xl bg-white dark:bg-gray-800 p-6 shadow-sm border border-[#dbe0e6] dark:border-gray-700">
+                    <div class="flex items-center justify-between">
+                        <p class="text-[#617589] dark:text-gray-400 text-sm font-medium">Total Completed (Monthly)</p>
+                        <span
+                            class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">task_alt</span>
+                    </div>
+                    <div class="flex items-baseline gap-2">
+                        <p class="text-[#111418] dark:text-white text-3xl font-bold tracking-tight">1,284</p>
+                        <p class="text-[#078838] text-sm font-bold">+12.5%</p>
+                    </div>
+                    <p class="text-xs text-[#617589] dark:text-gray-500 font-medium">vs. 1,141 last month</p>
+                </div>
+                <div
+                    class="flex flex-col gap-3 rounded-xl bg-white dark:bg-gray-800 p-6 shadow-sm border border-[#dbe0e6] dark:border-gray-700">
+                    <div class="flex items-center justify-between">
+                        <p class="text-[#617589] dark:text-gray-400 text-sm font-medium">Avg. Time to Complete</p>
+                        <span
+                            class="material-symbols-outlined text-orange-500 bg-orange-100 dark:bg-orange-500/10 p-2 rounded-lg">timer</span>
+                    </div>
+                    <div class="flex items-baseline gap-2">
+                        <p class="text-[#111418] dark:text-white text-3xl font-bold tracking-tight">3d 4h</p>
+                        <p class="text-[#e73908] text-sm font-bold">-5%</p>
+                    </div>
+                    <p class="text-xs text-[#617589] dark:text-gray-500 font-medium">Faster than avg. of 3d 9h</p>
+                </div>
+                <div
+                    class="flex flex-col gap-3 rounded-xl bg-white dark:bg-gray-800 p-6 shadow-sm border border-[#dbe0e6] dark:border-gray-700">
+                    <div class="flex items-center justify-between">
+                        <p class="text-[#617589] dark:text-gray-400 text-sm font-medium">Efficiency Score</p>
+                        <span
+                            class="material-symbols-outlined text-blue-500 bg-blue-100 dark:bg-blue-500/10 p-2 rounded-lg">trending_up</span>
+                    </div>
+                    <div class="flex items-baseline gap-2">
+                        <p class="text-[#111418] dark:text-white text-3xl font-bold tracking-tight">94%</p>
+                        <p class="text-[#078838] text-sm font-bold">+2.1%</p>
+                    </div>
+                    <p class="text-xs text-[#617589] dark:text-gray-500 font-medium">Productivity benchmark exceeded</p>
+                </div>
+                <div
+                    class="flex flex-col gap-3 rounded-xl bg-white dark:bg-gray-800 p-6 shadow-sm border border-[#dbe0e6] dark:border-gray-700">
+                    <div class="flex items-center justify-between">
+                        <p class="text-[#617589] dark:text-gray-400 text-sm font-medium">Team Load</p>
+                        <span
+                            class="material-symbols-outlined text-purple-500 bg-purple-100 dark:bg-purple-500/10 p-2 rounded-lg">groups</span>
+                    </div>
+                    <div class="flex items-baseline gap-2">
+                        <p class="text-[#111418] dark:text-white text-3xl font-bold tracking-tight">8.2<span
+                                class="text-lg text-[#617589]">/10</span></p>
+                        <p class="text-[#617589] text-sm font-bold">Stable</p>
+                    </div>
+                    <p class="text-xs text-[#617589] dark:text-gray-500 font-medium">Active tasks per member</p>
+                </div>
+            </div>
+            <!-- Filter Panel -->
+            <div id="filterPanel" class="hidden mb-6 p-4 rounded-lg border border-[#dbe0e6] dark:border-gray-700 bg-white dark:bg-gray-800">
+                <div class="flex flex-wrap items-center gap-4">
+                    <div class="flex-1 min-w-[200px]">
+                        <label class="text-xs font-semibold text-[#617589] mb-1 block">Search</label>
+                        <input id="searchInput" type="text" placeholder="Search by title or assignee..."
+                            class="w-full px-3 py-2 rounded-lg border border-[#dbe0e6] dark:border-gray-700 bg-background-light dark:bg-gray-900 text-sm focus:ring-2 focus:ring-primary/50" />
+                    </div>
+                    <div>
+                        <label class="text-xs font-semibold text-[#617589] mb-1 block">Assignee</label>
+                        <select id="assigneeFilter"
+                            class="px-3 py-2 rounded-lg border border-[#dbe0e6] dark:border-gray-700 bg-background-light dark:bg-gray-900 text-sm focus:ring-primary">
+                            <option value="">All Assignees</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-xs font-semibold text-[#617589] mb-1 block">Date From</label>
+                        <input id="dateFrom" type="date"
+                            class="px-3 py-2 rounded-lg border border-[#dbe0e6] dark:border-gray-700 bg-background-light dark:bg-gray-900 text-sm focus:ring-primary" />
+                    </div>
+                    <div>
+                        <label class="text-xs font-semibold text-[#617589] mb-1 block">Date To</label>
+                        <input id="dateTo" type="date"
+                            class="px-3 py-2 rounded-lg border border-[#dbe0e6] dark:border-gray-700 bg-background-light dark:bg-gray-900 text-sm focus:ring-primary" />
+                    </div>
+                    <div class="flex items-end gap-2">
+                        <button id="applyFilterBtn"
+                            class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-semibold hover:bg-primary/90">Apply</button>
+                        <button id="clearFilterBtn"
+                            class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-semibold hover:bg-gray-300 dark:hover:bg-gray-600">Clear</button>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="rounded-lg border border-[#dbe0e6] dark:border-gray-700 bg-white dark:bg-gray-800 overflow-hidden shadow-sm">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left grid-table">
+                        <thead>
+                            <tr class="bg-gray-50 dark:bg-gray-900/50">
+                                <th
+                                    class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-[#617589] dark:text-gray-400">
+                                    Task Title</th>
+                                <th
+                                    class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-[#617589] dark:text-gray-400">
+                                    Assigned To</th>
+                                <th
+                                    class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-[#617589] dark:text-gray-400">
+                                    Completion Date</th>
+                                <th
+                                    class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-[#617589] dark:text-gray-400">
+                                    Priority</th>
+                                <th
+                                    class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-[#617589] dark:text-gray-400">
+                                    Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white dark:bg-gray-800">
+                            <tr class="hover:bg-gray-50/50 dark:hover:bg-gray-900/30 transition-colors">
+                                <td class="px-6 py-5">
+                                    <div class="flex flex-col">
+                                        <span class="text-[#111418] dark:text-white font-semibold text-sm">Quarterly
+                                            Audit Preparation</span>
+                                        <span class="text-[#617589] dark:text-gray-500 text-xs">Finance Dept.</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5">
+                                    <div class="flex items-center gap-3">
+                                        <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-8"
+                                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCMZu46g8q06U2oJ89AgoUYu2Q3u6X2Mdgvccdc6jEQG4jtnygoyDTJi8cKxk3tn4dFAL7e-79Mv9GIBG3WPQ_7QNB8F3yRY-ZKqmL9cLoKmepLpWDQ338bqhqXxr1sEd00eGBCGeJ5Iv1TJcrAGqZgdZMt8-fjIgkLvdn0G58mjLKqM0TGgkLa0liRP29mZPOR1N6bCCNRY4FDpVm10HfQbo311yt9qi9CNjaoJJKEv6FUX9mMyUMHefHreyg3x2oNy8oRnpoUinE");'>
+                                        </div>
+                                        <span class="text-sm text-[#111418] dark:text-gray-300 font-medium">Aiden
+                                            Scott</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5 text-sm text-[#617589] dark:text-gray-400">Oct 24, 2023</td>
+                                <td class="px-6 py-5">
+                                    <span
+                                        class="inline-flex items-center rounded-full bg-red-50 dark:bg-red-500/10 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-red-700 dark:text-red-400 border border-red-100 dark:border-red-900/50">High</span>
+                                </td>
+                                <td class="px-6 py-5">
+                                    <a class="text-primary hover:underline font-bold text-sm inline-flex items-center gap-1"
+                                        href="#">
+                                        View Details
+                                        <span class="material-symbols-outlined text-sm">open_in_new</span>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50/50 dark:hover:bg-gray-900/30 transition-colors">
+                                <td class="px-6 py-5">
+                                    <div class="flex flex-col">
+                                        <span class="text-[#111418] dark:text-white font-semibold text-sm">E-commerce
+                                            Website Redesign</span>
+                                        <span class="text-[#617589] dark:text-gray-500 text-xs">Creative Team</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5">
+                                    <div class="flex items-center gap-3">
+                                        <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-8"
+                                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCbnY0Esq7-4IP2p9LEMDW04WvVbXf4T6MdMEBvTwFizlHo3c5flCfyg8tB1pq5NyTeFxRf1jJJoQ8N3AZ1a5BTZK7dYwoojzt0Vz65WHm4igU5xjhk1i40dp49n7zzNpHmFiY6KsgArGWiRx7xzqPnFsmcA9dsTTFtqYL7eODDJBbBqhs2UwrBBEm5buU1Jkt4JeT_PW54jwtG2n0r329v2P71tpTIM2jqfc3MMCAd5ZWR_vFwq5PGH8pXMskSNXSWGO4bHLYTVuM");'>
+                                        </div>
+                                        <span class="text-sm text-[#111418] dark:text-gray-300 font-medium">Sara
+                                            Jenkins</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5 text-sm text-[#617589] dark:text-gray-400">Oct 23, 2023</td>
+                                <td class="px-6 py-5">
+                                    <span
+                                        class="inline-flex items-center rounded-full bg-orange-50 dark:bg-orange-500/10 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-orange-700 dark:text-orange-400 border border-orange-100 dark:border-orange-900/50">Medium</span>
+                                </td>
+                                <td class="px-6 py-5">
+                                    <a class="text-primary hover:underline font-bold text-sm inline-flex items-center gap-1"
+                                        href="#">
+                                        View Details
+                                        <span class="material-symbols-outlined text-sm">open_in_new</span>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50/50 dark:hover:bg-gray-900/30 transition-colors">
+                                <td class="px-6 py-5">
+                                    <div class="flex flex-col">
+                                        <span class="text-[#111418] dark:text-white font-semibold text-sm">Client
+                                            Onboarding - Acme Corp</span>
+                                        <span class="text-[#617589] dark:text-gray-500 text-xs">Account
+                                            Management</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5">
+                                    <div class="flex items-center gap-3">
+                                        <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-8"
+                                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCNyGMTm1BLUGAdL86j01ouREUOBzu6qKJD4yT-PdBHOgOWu1ViLB9zlL-RCeLicY5p__asqynTQX2yWxPb1UFbC4HkSwtGH3Z8QSnTQgv69jPeqwG-clwQsRmGuceAybwvDcYSS5WzkFHz8MQiVf5q5k4jMj1Ixfzs4Dx4ZqA5VTGMaVS4nXtsRMGLWWOJRWrLOz-d0s5Kf38htw0a3drbZcFWEu7LoCoPAtcLIEzBBxP0YexI9VwOtwPb1moW29jqX_f7ReM_B5A");'>
+                                        </div>
+                                        <span class="text-sm text-[#111418] dark:text-gray-300 font-medium">Michael
+                                            Chen</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5 text-sm text-[#617589] dark:text-gray-400">Oct 22, 2023</td>
+                                <td class="px-6 py-5">
+                                    <span
+                                        class="inline-flex items-center rounded-full bg-blue-50 dark:bg-blue-500/10 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-blue-700 dark:text-blue-400 border border-blue-100 dark:border-blue-900/50">Low</span>
+                                </td>
+                                <td class="px-6 py-5">
+                                    <a class="text-primary hover:underline font-bold text-sm inline-flex items-center gap-1"
+                                        href="#">
+                                        View Details
+                                        <span class="material-symbols-outlined text-sm">open_in_new</span>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50/50 dark:hover:bg-gray-900/30 transition-colors">
+                                <td class="px-6 py-5">
+                                    <div class="flex flex-col">
+                                        <span class="text-[#111418] dark:text-white font-semibold text-sm">Payment
+                                            Gateway API Integration</span>
+                                        <span class="text-[#617589] dark:text-gray-500 text-xs">Development</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5">
+                                    <div class="flex items-center gap-3">
+                                        <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-8"
+                                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuArkIERP1xsADz7OBWZ0lFk_i5e8r6evezedUrVxcweKLHCTwZNqaDdnN33ii2d08ekJ2ejVX1OJ-1oXl5XZ_0PYhZXV_MCWTKS_gJud7MM2MlZZZrERoqDU8_2KiW5PEQnT1E_H6uJj2gFGrSlhA14vfcPGiQyra-EumzBe1lN9NtcvyzVVGR9yjtY8jjIiLJ8_RpwImK8rq7-IDvh-bO_y7TKk1ysuAkraIKje3ha04Wi_cKQGbgL5U_Ba7alRVREFlf4TLN2ZlE");'>
+                                        </div>
+                                        <span class="text-sm text-[#111418] dark:text-gray-300 font-medium">Emma
+                                            Wilson</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5 text-sm text-[#617589] dark:text-gray-400">Oct 21, 2023</td>
+                                <td class="px-6 py-5">
+                                    <span
+                                        class="inline-flex items-center rounded-full bg-purple-50 dark:bg-purple-500/10 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-purple-700 dark:text-purple-400 border border-purple-100 dark:border-purple-900/50">Urgent</span>
+                                </td>
+                                <td class="px-6 py-5">
+                                    <a class="text-primary hover:underline font-bold text-sm inline-flex items-center gap-1"
+                                        href="#">
+                                        View Details
+                                        <span class="material-symbols-outlined text-sm">open_in_new</span>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50/50 dark:hover:bg-gray-900/30 transition-colors">
+                                <td class="px-6 py-5">
+                                    <div class="flex flex-col">
+                                        <span class="text-[#111418] dark:text-white font-semibold text-sm">Mobile App
+                                            Bug Fixes v2.1</span>
+                                        <span class="text-[#617589] dark:text-gray-500 text-xs">QA Team</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5">
+                                    <div class="flex items-center gap-3">
+                                        <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-8"
+                                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA5JZ4Ql1JHTx3GqUbXYcu1uNShuUjA7DcmATaOVvnTcV-aoz2rcDeK0JzsF8-7QHVR4IyXdjythbD-Y_nJ7xr5YvITNKfR4OAsaBirHt2dIa9vvRwh-nXSMwXuc7hEWfo7MvUDg7Qxs6Jd-tuaveqRkSn_qf1UET56mrnTIpy4QGxUAX3zYHp0lAiIdetn2YFat9ChicxOPzUFlpSHV4isa8quuZxh80ZOvvTkmV3CMdjAic_AIA9ZdCJb816AemFMnxFte6YD1V0");'>
+                                        </div>
+                                        <span class="text-sm text-[#111418] dark:text-gray-300 font-medium">Liam
+                                            Parker</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5 text-sm text-[#617589] dark:text-gray-400">Oct 20, 2023</td>
+                                <td class="px-6 py-5">
+                                    <span
+                                        class="inline-flex items-center rounded-full bg-orange-50 dark:bg-orange-500/10 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-orange-700 dark:text-orange-400 border border-orange-100 dark:border-orange-900/50">Medium</span>
+                                </td>
+                                <td class="px-6 py-5">
+                                    <a class="text-primary hover:underline font-bold text-sm inline-flex items-center gap-1"
+                                        href="#">
+                                        View Details
+                                        <span class="material-symbols-outlined text-sm">open_in_new</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-900/50">
+                    <p class="text-sm text-[#617589] dark:text-gray-400 hidden sm:block">
+                        Showing <span class="font-bold">1</span> to <span class="font-bold">5</span> of <span
+                            class="font-bold">1,284</span> results
+                    </p>
+                    <div class="flex items-center gap-1">
+                        <button
+                            class="flex size-9 items-center justify-center rounded-lg border border-[#dbe0e6] dark:border-gray-700 bg-white dark:bg-gray-800 text-[#617589] dark:text-gray-400 hover:bg-gray-50 transition-colors">
+                            <span class="material-symbols-outlined text-lg">chevron_left</span>
+                        </button>
+                        <button
+                            class="flex size-9 items-center justify-center rounded-lg bg-primary text-white text-sm font-bold">1</button>
+                        <button
+                            class="flex size-9 items-center justify-center rounded-lg text-sm font-medium text-[#111418] dark:text-gray-300 hover:bg-white/10">2</button>
+                        <button
+                            class="flex size-9 items-center justify-center rounded-lg text-sm font-medium text-[#111418] dark:text-gray-300 hover:bg-white/10">3</button>
+                        <span class="px-2 text-[#617589]">...</span>
+                        <button
+                            class="flex size-9 items-center justify-center rounded-lg text-sm font-medium text-[#111418] dark:text-gray-300 hover:bg-white/10">257</button>
+                        <button
+                            class="flex size-9 items-center justify-center rounded-lg border border-[#dbe0e6] dark:border-gray-700 bg-white dark:bg-gray-800 text-[#617589] dark:text-gray-400 hover:bg-gray-50 transition-colors">
+                            <span class="material-symbols-outlined text-lg">chevron_right</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer
+            class="mt-auto border-t border-[#dbe0e6] dark:border-gray-800 bg-white dark:bg-background-dark py-6 text-center">
+            <p class="text-sm text-[#617589] dark:text-gray-500">© 2024 TaskManager. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        let allTasks = [];
+        let filteredTasks = [];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('token');
+            const user = JSON.parse(localStorage.getItem('user'));
+
+            if (!token || !user || user.role !== 'admin') {
+                alert('Access Denied. Please login as an administrator.');
+                window.location.href = '../taskmanager_login_screen/code.html';
+                return;
+            }
+
+            loadCompletedTasks();
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            // Toggle filter panel
+            document.getElementById('toggleFilterBtn').addEventListener('click', () => {
+                document.getElementById('filterPanel').classList.toggle('hidden');
+            });
+
+            // Apply filters
+            document.getElementById('applyFilterBtn').addEventListener('click', applyFilters);
+
+            // Clear filters
+            document.getElementById('clearFilterBtn').addEventListener('click', () => {
+                document.getElementById('searchInput').value = '';
+                document.getElementById('assigneeFilter').value = '';
+                document.getElementById('dateFrom').value = '';
+                document.getElementById('dateTo').value = '';
+                filteredTasks = [...allTasks];
+                renderTasks(filteredTasks);
+            });
+
+            // Export report
+            document.getElementById('exportBtn').addEventListener('click', exportToCSV);
+        }
+
+        function applyFilters() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const assignee = document.getElementById('assigneeFilter').value;
+            const dateFrom = document.getElementById('dateFrom').value;
+            const dateTo = document.getElementById('dateTo').value;
+
+            filteredTasks = allTasks.filter(task => {
+                // Search filter
+                const matchesSearch = !searchTerm || 
+                    task.title.toLowerCase().includes(searchTerm) || 
+                    task.assigned_to.fullname.toLowerCase().includes(searchTerm);
+
+                // Assignee filter
+                const matchesAssignee = !assignee || task.assigned_to.id === assignee;
+
+                // Date filters
+                const taskDate = task.updated_at ? new Date(task.updated_at) : null;
+                const matchesDateFrom = !dateFrom || (taskDate && taskDate >= new Date(dateFrom));
+                const matchesDateTo = !dateTo || (taskDate && taskDate <= new Date(dateTo + 'T23:59:59'));
+
+                return matchesSearch && matchesAssignee && matchesDateFrom && matchesDateTo;
+            });
+
+            renderTasks(filteredTasks);
+        }
+
+        function exportToCSV() {
+            const tasksToExport = filteredTasks.length > 0 ? filteredTasks : allTasks;
+            
+            if (tasksToExport.length === 0) {
+                alert('No tasks to export');
+                return;
+            }
+
+            const headers = ['Title', 'Description', 'Assigned To', 'Email', 'Completion Date', 'Priority', 'Status'];
+            const rows = tasksToExport.map(task => [
+                `"${task.title.replace(/"/g, '""')}"`,
+                `"${task.description.replace(/"/g, '""')}"`,
+                `"${task.assigned_to.fullname}"`,
+                `"${task.assigned_to.email}"`,
+                task.updated_at ? new Date(task.updated_at).toLocaleDateString() : 'N/A',
+                (task.priority || 'medium').charAt(0).toUpperCase() + (task.priority || 'medium').slice(1),
+                'Completed'
+            ]);
+
+            const csvContent = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `completed_tasks_${new Date().toISOString().split('T')[0]}.csv`;
+            link.click();
+        }
+
+        async function loadCompletedTasks() {
+            const token = localStorage.getItem('token');
+            
+            try {
+                const response = await fetch('http://localhost:8000/tasks/completed', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (response.ok) {
+                    allTasks = await response.json();
+                    filteredTasks = [...allTasks];
+                    
+                    // Populate assignee filter dropdown
+                    populateAssigneeFilter();
+                    
+                    // Render tasks
+                    renderTasks(allTasks);
+                    
+                    // Update total completed stat
+                    const totalCompletedEl = document.querySelector('.grid.grid-cols-1 .text-3xl');
+                    if (totalCompletedEl) {
+                        totalCompletedEl.textContent = allTasks.length;
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading completed tasks:', error);
+            }
+        }
+
+        function populateAssigneeFilter() {
+            const assigneeFilter = document.getElementById('assigneeFilter');
+            const uniqueAssignees = [...new Map(allTasks.map(t => [t.assigned_to.id, t.assigned_to])).values()];
+            
+            assigneeFilter.innerHTML = '<option value="">All Assignees</option>';
+            uniqueAssignees.forEach(assignee => {
+                assigneeFilter.innerHTML += `<option value="${assignee.id}">${assignee.fullname}</option>`;
+            });
+        }
+
+        function renderTasks(tasks) {
+            const tbody = document.querySelector('tbody');
+            tbody.innerHTML = '';
+            
+            if (tasks.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="px-6 py-12 text-center text-slate-500">
+                            <span class="material-symbols-outlined text-4xl mb-2">task_alt</span>
+                            <p>No completed tasks found</p>
+                        </td>
+                    </tr>
+                `;
+            } else {
+                tasks.forEach(task => {
+                    const completionDate = task.updated_at ? new Date(task.updated_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'N/A';
+                    const initials = task.assigned_to.fullname.split(' ').map(n => n[0]).join('').toUpperCase();
+                    
+                    // Priority styling
+                    const priority = task.priority || 'medium';
+                    const priorityConfig = {
+                        low: { bg: 'bg-blue-50 dark:bg-blue-500/10', text: 'text-blue-700 dark:text-blue-400', border: 'border-blue-100 dark:border-blue-900/50', label: 'Low' },
+                        medium: { bg: 'bg-amber-50 dark:bg-amber-500/10', text: 'text-amber-700 dark:text-amber-400', border: 'border-amber-100 dark:border-amber-900/50', label: 'Medium' },
+                        high: { bg: 'bg-orange-50 dark:bg-orange-500/10', text: 'text-orange-700 dark:text-orange-400', border: 'border-orange-100 dark:border-orange-900/50', label: 'High' },
+                        urgent: { bg: 'bg-red-50 dark:bg-red-500/10', text: 'text-red-700 dark:text-red-400', border: 'border-red-100 dark:border-red-900/50', label: 'Urgent' }
+                    };
+                    const pConfig = priorityConfig[priority] || priorityConfig.medium;
+                    
+                    tbody.innerHTML += `
+                        <tr class="hover:bg-gray-50/50 dark:hover:bg-gray-900/30 transition-colors">
+                            <td class="px-6 py-5">
+                                <div class="flex flex-col">
+                                    <span class="text-[#111418] dark:text-white font-semibold text-sm">${task.title}</span>
+                                    <span class="text-[#617589] dark:text-gray-500 text-xs">${task.description.substring(0, 50)}${task.description.length > 50 ? '...' : ''}</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-5">
+                                <div class="flex items-center gap-3">
+                                    <div class="size-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xs">
+                                        ${initials}
+                                    </div>
+                                    <span class="text-sm text-[#111418] dark:text-gray-300 font-medium">${task.assigned_to.fullname}</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-5 text-sm text-[#617589] dark:text-gray-400">${completionDate}</td>
+                            <td class="px-6 py-5">
+                                <span class="inline-flex items-center rounded-full ${pConfig.bg} px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider ${pConfig.text} border ${pConfig.border}">${pConfig.label}</span>
+                            </td>
+                            <td class="px-6 py-5">
+                                <a class="text-primary hover:underline font-bold text-sm inline-flex items-center gap-1" href="#">
+                                    View Details
+                                    <span class="material-symbols-outlined text-sm">open_in_new</span>
+                                </a>
+                            </td>
+                        </tr>
+                    `;
+                });
+            }
+            
+            // Update pagination text
+            const paginationText = document.querySelector('.flex.items-center.justify-between.p-4 p');
+            if (paginationText) {
+                paginationText.innerHTML = `Showing <span class="font-bold">1</span> to <span class="font-bold">${tasks.length}</span> of <span class="font-bold">${allTasks.length}</span> results`;
+            }
+        }
+    </script>
+</body>
+
+</html>

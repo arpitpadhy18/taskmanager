@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>TaskManager - Dashboard</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#0f172a",
+                        "grid-border": "#e5e7eb",
+                        "grid-header-bg": "#f9fafb"
+                    },
+                    fontFamily: {
+                        "sans": ["Inter", "system-ui", "-apple-system", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "grid": "0.5rem"
+                    },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer components {
+            .grid-cell {
+                @apply border-r border-b border-grid-border dark:border-slate-700 px-6 py-5 text-sm align-middle;
+            }
+            .grid-header {
+                @apply border-r border-b border-grid-border dark:border-slate-700 px-6 py-4 text-left text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider bg-grid-header-bg dark:bg-slate-800/50;
+            }
+            .grid-cell:last-child, .grid-header:last-child {
+                @apply border-r-0;
+            }
+            .grid-row:last-child .grid-cell {
+                @apply border-b-0;
+            }
+        }
+    </style>
+</head>
+
+<body class="font-sans bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+    <div class="relative flex min-h-screen w-full flex-col">
+        <header
+            class="flex items-center justify-between border-b border-grid-border dark:border-slate-700 bg-white dark:bg-slate-900 px-6 lg:px-10 py-4 sticky top-0 z-50">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 flex items-center justify-center bg-primary rounded-lg text-white shadow-sm">
+                    <span class="material-symbols-outlined text-xl">task_alt</span>
+                </div>
+                <h2 class="text-xl font-bold tracking-tight">TaskManager</h2>
+            </div>
+            <div class="flex items-center gap-6">
+                <div class="hidden md:flex flex-col items-end">
+                    <span class="text-[10px] uppercase font-bold text-slate-400 leading-none mb-1">Session</span>
+                    <span class="text-sm font-semibold">Alex Chen</span>
+                </div>
+                <a href="../taskmanager_login_screen/code.html"
+                    class="flex items-center justify-center rounded-lg h-10 px-4 border border-grid-border dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-sm font-semibold">
+                    <span>Logout</span>
+                </a>
+            </div>
+        </header>
+        <main class="flex-1 flex flex-col max-w-[1280px] mx-auto w-full px-6 lg:px-10 py-10">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-10">
+                <div>
+                    <h1 class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">Welcome back, Alex
+                    </h1>
+                    <p class="text-slate-500 dark:text-slate-400 mt-2 text-lg">You have <span
+                            class="text-primary font-semibold">5 tasks</span> remaining for today.</p>
+                </div>
+                <button
+                    class="flex items-center justify-center rounded-lg h-12 px-6 bg-primary text-white text-sm font-bold shadow-md shadow-primary/20 hover:bg-blue-600 transition-all gap-2">
+                    <span class="material-symbols-outlined">add</span>
+                    <span>Create New Task</span>
+                </button>
+            </div>
+            <div
+                class="bg-white dark:bg-slate-900 rounded-grid border border-grid-border dark:border-slate-700 overflow-hidden shadow-sm">
+                <div class="overflow-x-auto">
+                    <table class="w-full border-collapse table-fixed min-w-[800px]">
+                        <thead>
+                            <tr>
+                                <th class="grid-header w-[25%]">Task Title</th>
+                                <th class="grid-header w-[35%]">Description</th>
+                                <th class="grid-header w-[15%]">Due Date</th>
+                                <th class="grid-header w-[12%]">Priority</th>
+                                <th class="grid-header w-[13%]">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="grid-row hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition-colors">
+                                <td class="grid-cell">
+                                    <span class="font-bold text-slate-900 dark:text-white">Redesign Landing Page</span>
+                                </td>
+                                <td class="grid-cell text-slate-600 dark:text-slate-400 leading-relaxed">
+                                    Update hero section and mobile navigation layout for Q4 marketing push.
+                                </td>
+                                <td class="grid-cell text-slate-500 dark:text-slate-400 font-medium">
+                                    Oct 28, 2023
+                                </td>
+                                <td class="grid-cell">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+                                        <span
+                                            class="text-xs font-bold uppercase tracking-wide text-rose-600 dark:text-rose-400">High</span>
+                                    </div>
+                                </td>
+                                <td class="grid-cell">
+                                    <span
+                                        class="inline-flex items-center px-2.5 py-1 rounded text-[11px] font-bold uppercase tracking-wider bg-primary/10 text-primary border border-primary/20">
+                                        In Progress
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr class="grid-row hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition-colors">
+                                <td class="grid-cell">
+                                    <span class="font-bold text-slate-900 dark:text-white">Database Migration</span>
+                                </td>
+                                <td class="grid-cell text-slate-600 dark:text-slate-400 leading-relaxed">
+                                    Sync legacy data to new production clusters on AWS.
+                                </td>
+                                <td class="grid-cell text-slate-500 dark:text-slate-400 font-medium">
+                                    Nov 02, 2023
+                                </td>
+                                <td class="grid-cell">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                                        <span
+                                            class="text-xs font-bold uppercase tracking-wide text-amber-600 dark:text-amber-400">Medium</span>
+                                    </div>
+                                </td>
+                                <td class="grid-cell">
+                                    <span
+                                        class="inline-flex items-center px-2.5 py-1 rounded text-[11px] font-bold uppercase tracking-wider bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
+                                        To Do
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr class="grid-row hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition-colors">
+                                <td class="grid-cell">
+                                    <span class="font-bold text-slate-900 dark:text-white">User Feedback Sync</span>
+                                </td>
+                                <td class="grid-cell text-slate-600 dark:text-slate-400 leading-relaxed">
+                                    Process Q3 interview transcripts for common pain points.
+                                </td>
+                                <td class="grid-cell text-slate-500 dark:text-slate-400 font-medium">
+                                    Oct 25, 2023
+                                </td>
+                                <td class="grid-cell">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+                                        <span
+                                            class="text-xs font-bold uppercase tracking-wide text-rose-600 dark:text-rose-400">High</span>
+                                    </div>
+                                </td>
+                                <td class="grid-cell">
+                                    <span
+                                        class="inline-flex items-center px-2.5 py-1 rounded text-[11px] font-bold uppercase tracking-wider bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/50">
+                                        Done
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr class="grid-row hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition-colors">
+                                <td class="grid-cell">
+                                    <span class="font-bold text-slate-900 dark:text-white">Budget Planning</span>
+                                </td>
+                                <td class="grid-cell text-slate-600 dark:text-slate-400 leading-relaxed">
+                                    Prepare comprehensive financial forecasts for 2024 operations.
+                                </td>
+                                <td class="grid-cell text-slate-500 dark:text-slate-400 font-medium">
+                                    Nov 15, 2023
+                                </td>
+                                <td class="grid-cell">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-2 h-2 rounded-full bg-sky-400"></span>
+                                        <span
+                                            class="text-xs font-bold uppercase tracking-wide text-sky-600 dark:text-sky-400">Low</span>
+                                    </div>
+                                </td>
+                                <td class="grid-cell">
+                                    <span
+                                        class="inline-flex items-center px-2.5 py-1 rounded text-[11px] font-bold uppercase tracking-wider bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
+                                        To Do
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr class="grid-row hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition-colors">
+                                <td class="grid-cell">
+                                    <span class="font-bold text-slate-900 dark:text-white">Security Audit</span>
+                                </td>
+                                <td class="grid-cell text-slate-600 dark:text-slate-400 leading-relaxed">
+                                    Bi-annual review of access logs and firewall rules.
+                                </td>
+                                <td class="grid-cell text-slate-500 dark:text-slate-400 font-medium">
+                                    Dec 05, 2023
+                                </td>
+                                <td class="grid-cell">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                                        <span
+                                            class="text-xs font-bold uppercase tracking-wide text-amber-600 dark:text-amber-400">Medium</span>
+                                    </div>
+                                </td>
+                                <td class="grid-cell">
+                                    <span
+                                        class="inline-flex items-center px-2.5 py-1 rounded text-[11px] font-bold uppercase tracking-wider bg-primary/10 text-primary border border-primary/20">
+                                        In Progress
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12">
+                <a href="../completed_tasks_overview/code.html"
+                    class="bg-white dark:bg-slate-900 p-6 rounded-grid border border-grid-border dark:border-slate-700 flex items-center justify-between shadow-sm hover:border-primary transition-colors">
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-widest text-slate-400">Completed</p>
+                        <p class="text-3xl font-extrabold mt-1 text-slate-900 dark:text-white">12</p>
+                    </div>
+                    <div
+                        class="w-12 h-12 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 flex items-center justify-center rounded-xl">
+                        <span class="material-symbols-outlined text-2xl">check_circle</span>
+                    </div>
+                </a>
+                <a href="../active_tasks_monitoring/code.html"
+                    class="bg-white dark:bg-slate-900 p-6 rounded-grid border border-grid-border dark:border-slate-700 flex items-center justify-between shadow-sm hover:border-primary transition-colors">
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-widest text-slate-400">In Progress</p>
+                        <p class="text-3xl font-extrabold mt-1 text-slate-900 dark:text-white">5</p>
+                    </div>
+                    <div class="w-12 h-12 bg-primary/10 text-primary flex items-center justify-center rounded-xl">
+                        <span class="material-symbols-outlined text-2xl">pending</span>
+                    </div>
+                </a>
+                <a href="../active_tasks_monitoring/code.html"
+                    class="bg-white dark:bg-slate-900 p-6 rounded-grid border border-grid-border dark:border-slate-700 flex items-center justify-between shadow-sm hover:border-primary transition-colors">
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-widest text-slate-400">To Do</p>
+                        <p class="text-3xl font-extrabold mt-1 text-slate-900 dark:text-white">8</p>
+                    </div>
+                    <div
+                        class="w-12 h-12 bg-slate-50 dark:bg-slate-800 text-slate-400 flex items-center justify-center rounded-xl">
+                        <span class="material-symbols-outlined text-2xl">list_alt</span>
+                    </div>
+                </a>
+            </div>
+        </main>
+        <footer
+            class="border-t border-grid-border dark:border-slate-700 py-8 px-10 bg-white dark:bg-slate-900 text-center">
+            <p class="text-xs font-medium text-slate-400 uppercase tracking-widest">© 2023 TaskManager Inc. • Optimized
+                for efficiency</p>
+        </footer>
+    </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        // 1. Check Authentication
+        const token = localStorage.getItem('token');
+        const user = JSON.parse(localStorage.getItem('user'));
+
+        if (!token || !user) {
+            alert('Please login to continue.');
+            window.location.href = '../taskmanager_login_screen/code.html';
+            return;
+        }
+
+        // 2. Update UI with user info
+        document.querySelector('header .text-sm.font-semibold').textContent = user.fullname;
+        document.querySelector('main h1').textContent = `Welcome back, ${user.fullname.split(' ')[0]}`;
+
+        // 3. Setup Logout
+        document.querySelector('a[href*="login"]').addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.clear();
+            window.location.href = '../taskmanager_login_screen/code.html';
+        });
+
+        // 4. Fetch and display tasks
+        try {
+            const response = await fetch('http://localhost:8000/tasks/my', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+
+            if (!response.ok) {
+                if (response.status === 401) {
+                    alert('Session expired. Please login again.');
+                    localStorage.clear();
+                    window.location.href = '../taskmanager_login_screen/code.html';
+                    return;
+                }
+                throw new Error('Failed to fetch tasks');
+            }
+
+            const tasks = await response.json();
+            renderTasks(tasks);
+            updateStats(tasks);
+        } catch (error) {
+            console.error('Error:', error);
+            document.querySelector('tbody').innerHTML = `
+                <tr><td colspan="5" class="grid-cell text-center text-slate-500 py-10">Failed to load tasks. Make sure backend is running.</td></tr>
+            `;
+        }
+
+        // Hide create task button for regular users
+        const createBtn = document.querySelector('button');
+        if (user.role !== 'admin') {
+            createBtn.style.display = 'none';
+        }
+    });
+
+    function renderTasks(tasks) {
+        const tbody = document.querySelector('tbody');
+        
+        if (tasks.length === 0) {
+            tbody.innerHTML = `
+                <tr><td colspan="5" class="grid-cell text-center text-slate-500 py-10">No tasks assigned yet.</td></tr>
+            `;
+            return;
+        }
+
+        tbody.innerHTML = tasks.map(task => {
+            const statusClasses = {
+                'pending': 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700',
+                'in_progress': 'bg-primary/10 text-primary border-primary/20',
+                'completed': 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800/50'
+            };
+            const statusLabels = {
+                'pending': 'To Do',
+                'in_progress': 'In Progress',
+                'completed': 'Done'
+            };
+            const dueDate = new Date(task.due_date).toLocaleDateString('en-US', { 
+                month: 'short', day: 'numeric', year: 'numeric' 
+            });
+
+            return `
+                <tr class="grid-row hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition-colors">
+                    <td class="grid-cell">
+                        <span class="font-bold text-slate-900 dark:text-white">${task.title}</span>
+                    </td>
+                    <td class="grid-cell text-slate-600 dark:text-slate-400 leading-relaxed">
+                        ${task.description}
+                    </td>
+                    <td class="grid-cell text-slate-500 dark:text-slate-400 font-medium">
+                        ${dueDate}
+                    </td>
+                    <td class="grid-cell">
+                        <select onchange="updateTaskStatus('${task.id}', this.value)" 
+                            class="text-xs font-bold uppercase tracking-wide bg-transparent border border-slate-200 dark:border-slate-700 rounded px-2 py-1 cursor-pointer">
+                            <option value="pending" ${task.status === 'pending' ? 'selected' : ''}>To Do</option>
+                            <option value="in_progress" ${task.status === 'in_progress' ? 'selected' : ''}>In Progress</option>
+                            <option value="completed" ${task.status === 'completed' ? 'selected' : ''}>Done</option>
+                        </select>
+                    </td>
+                    <td class="grid-cell">
+                        <span class="inline-flex items-center px-2.5 py-1 rounded text-[11px] font-bold uppercase tracking-wider ${statusClasses[task.status]} border">
+                            ${statusLabels[task.status]}
+                        </span>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+    }
+
+    function updateStats(tasks) {
+        const completed = tasks.filter(t => t.status === 'completed').length;
+        const inProgress = tasks.filter(t => t.status === 'in_progress').length;
+        const pending = tasks.filter(t => t.status === 'pending').length;
+
+        // Update summary text
+        const remaining = pending + inProgress;
+        document.querySelector('main p span.text-primary').textContent = `${remaining} tasks`;
+
+        // Update stat cards
+        const statCards = document.querySelectorAll('.grid-cols-1.sm\\:grid-cols-3 > a');
+        statCards[0].querySelector('.text-3xl').textContent = completed;
+        statCards[1].querySelector('.text-3xl').textContent = inProgress;
+        statCards[2].querySelector('.text-3xl').textContent = pending;
+    }
+
+    async function updateTaskStatus(taskId, newStatus) {
+        const token = localStorage.getItem('token');
+        try {
+            const response = await fetch(`http://localhost:8000/tasks/${taskId}/status`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ status: newStatus })
+            });
+
+            if (response.ok) {
+                // Refresh tasks
+                const tasksResponse = await fetch('http://localhost:8000/tasks/my', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const tasks = await tasksResponse.json();
+                renderTasks(tasks);
+                updateStats(tasks);
+            } else {
+                alert('Failed to update task status');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Failed to update task status');
+        }
+    }
+</script>
+</body>
+
+</html>
