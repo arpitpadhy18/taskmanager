@@ -3,9 +3,12 @@ import os
 import motor.motor_asyncio
 from passlib.context import CryptContext
 from datetime import datetime
+from dotenv import load_dotenv
 
-# Direct config for script
-MONGO_DETAILS = "mongodb://localhost:27017"
+load_dotenv()
+
+# Read from .env so we always connect to the right DB
+MONGO_DETAILS = os.getenv("MONGO_DETAILS", "mongodb://localhost:27017")
 password_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def get_hashed_password(password: str) -> str:
