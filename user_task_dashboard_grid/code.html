@@ -291,7 +291,7 @@
 
         // 4. Fetch and display tasks
         try {
-            const response = await fetch('http://localhost:8000/tasks/my', {
+            const response = await fetch('https://taskmanager-mszs.onrender.com/tasks/my', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
 
@@ -395,7 +395,7 @@
     async function updateTaskStatus(taskId, newStatus) {
         const token = localStorage.getItem('token');
         try {
-            const response = await fetch(`http://localhost:8000/tasks/${taskId}/status`, {
+            const response = await fetch(`https://taskmanager-mszs.onrender.com/tasks/${taskId}/status`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -406,7 +406,7 @@
 
             if (response.ok) {
                 // Refresh tasks
-                const tasksResponse = await fetch('http://localhost:8000/tasks/my', {
+                const tasksResponse = await fetch('https://taskmanager-mszs.onrender.com/tasks/my', {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 const tasks = await tasksResponse.json();

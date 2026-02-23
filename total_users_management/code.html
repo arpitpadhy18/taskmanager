@@ -445,7 +445,7 @@
             const paginationText = document.querySelector('.px-6.py-4.bg-slate-50 p');
             
             try {
-                const response = await fetch('http://localhost:8000/auth/users', {
+                const response = await fetch('https://taskmanager-mszs.onrender.com/auth/users', {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
 
@@ -535,7 +535,7 @@
             const token = localStorage.getItem('token');
 
             try {
-                const response = await fetch(`http://localhost:8000/auth/users/${userId}`, {
+                const response = await fetch(`https://taskmanager-mszs.onrender.com/auth/users/${userId}`, {
                     method: 'DELETE',
                     headers: {
                         'Authorization': `Bearer ${token}`
