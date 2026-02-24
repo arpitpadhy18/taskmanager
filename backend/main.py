@@ -39,6 +39,6 @@ async def startup_db_client():
         logger.error(f"Could not connect to MongoDB: {e}")
 
 
-@app.get("/")
+@app.get("/", methods=["GET", "HEAD"])
 async def root():
     return {"message": "Welcome to the Task Manager API"}
