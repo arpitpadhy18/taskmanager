@@ -53,8 +53,13 @@ async def send_credentials_email(email: EmailStr, fullname: str, password: str):
         subtype=MessageType.html
     )
 
-    fm = FastMail(conf)
     if conf:
-        await fm.send_message(message)
+        try:
+            fm = FastMail(conf)
+            await fm.send_message(message)
+            print(f"✅ Email sent successfully to {email}")
+        except Exception as e:
+            print(f"⚠️ Failed to send email to {email}: {e}")
+            print(f"📧 User {fullname} was created with password: {password}")
     else:
         print(f"📧 Simulated Email to {email}: User {fullname} created with password {password}")
